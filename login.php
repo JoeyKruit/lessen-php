@@ -30,6 +30,8 @@
                 <div class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <h1>Inloggen</h1>
+                            <hr />
                             <form method="POST" action="app/authenticate.php">
                                 <div class="form-group">
                                     <label for="username">Gebruikersnaam</label>
@@ -39,7 +41,7 @@
                                     <label for="password">Wachtwoord</label>
                                     <input type="password" class="form-control" id="password" placeholder="Wachtwoord">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Inloggen</button>
+                                <button type="submit" class="btn btn-primary pull-right">Inloggen</button>
                             </form>
                         </div>
                     </div>
