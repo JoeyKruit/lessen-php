@@ -1,12 +1,3 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['user_id'])) {
-    // Er is niet ingelogd, dus keren we terug naar het login-scherm
-    header('Location: login.php');
-    exit(0);
-}
-?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>

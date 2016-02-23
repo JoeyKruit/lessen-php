@@ -35,11 +35,11 @@
                             <form method="POST" action="app/authenticate.php">
                                 <div class="form-group">
                                     <label for="username">Gebruikersnaam</label>
-                                    <input type="text" class="form-control" id="username" placeholder="Gebruikersnaam">
+                                    <input name="username" type="text" class="form-control" id="username" placeholder="Gebruikersnaam">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Wachtwoord</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Wachtwoord">
+                                    <input name="password" type="password" class="form-control" id="password" placeholder="Wachtwoord">
                                 </div>
                                 <button type="submit" class="btn btn-primary pull-right">Inloggen</button>
                             </form>
