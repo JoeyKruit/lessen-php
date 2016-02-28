@@ -1,5 +1,6 @@
 <?php
 
+echo "<h1>DB Output</h1>";
 try {
     $db = new PDO('mysql:host=127.0.0.1;dbname=les05', 'root', 'root');
 
