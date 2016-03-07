@@ -1,3 +1,32 @@
+<?php
+/*
+ * We starten de sessie op zodat we toegang hebben tot de
+ * sessie variabelen (cookies op de server)
+ */
+session_start();
+
+/*
+ * Standaard vullen we de twee variabelen met een lege string
+ */
+$error_message = '';
+$username = '';
+
+/*
+ * Alleen als de sessie variabele error_message is gevuld stoppen
+ * we deze in de variabele $error_message. Later zullen we deze gebruiken.
+ */
+if(isset($_SESSION['error_message'])) {
+    $error_message = $_SESSION['error_message'];
+}
+
+/*
+ * Alleen als de sessie variabele username is gevuld stoppen
+ * we deze in de variabele $username. Later zullen we deze gebruiken.
+ */
+if(isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
     <head>
@@ -32,10 +61,23 @@
                         <div class="panel-body">
                             <h1>Inloggen</h1>
                             <hr />
+                            <?php
+                            /*
+                             * We willen de alert box alleen laten zien als er ook
+                             * een error_message is, dus niet een lege string is.
+                             */
+                            if(!empty($error_message)):
+                            ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?= $error_message; ?>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
                             <form method="POST" action="app/authenticate.php">
                                 <div class="form-group">
                                     <label for="username">Gebruikersnaam</label>
-                                    <input name="username" type="text" class="form-control" id="username" placeholder="Gebruikersnaam">
+                                    <input name="username" type="text" class="form-control" id="username" placeholder="Gebruikersnaam" value="<?= $username; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Wachtwoord</label>
