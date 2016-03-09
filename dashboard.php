@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['username']) && !isset($_SESSION['id']) && !isset($_SESSION['email'])) {
+    /*
+     * Er is blijkbaar niet ingelogd, want deze driee sessie variabelen bestaan niet
+     * Dus gaan we terug naar het login formulier
+     */
+    $_SESSION['error_messages'][] = 'Voor het dashboard moet je ingelogd zijn.';
+    header('Location: login.php');
+    exit(0);
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -13,6 +26,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet" />
@@ -33,14 +47,20 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Instellingen</a></li>
-                <li><a href="#">Profiel</a></li>
-                <li><a href="#">Help</a></li>
+                <li><a href="/"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;Welkom, <?= $_SESSION['naam']; ?><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-edit"></i>&nbsp;Profiel</a></li>
+                        <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Instellingen</a></li>
+                        <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="logout.php"><i class="fa fa-lock"></i>&nbsp;Afmelden</a></li>
+                    </ul>
+                </li>
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Zoeken...">
-            </form>
+<!--            <form class="navbar-form navbar-right">-->
+<!--                <input type="text" class="form-control" placeholder="Zoeken...">-->
+<!--            </form>-->
         </div>
     </div>
 </nav>

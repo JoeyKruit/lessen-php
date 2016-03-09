@@ -46,7 +46,11 @@ if(!isset($_POST['username']) && !isset($_POST['password'])) {
  */
 $username = $_POST['username'];
 $password = $_POST['password'];
+if (empty($username))
+    $_SESSION['error_messages'][] = 'Gebruikersnaam is verplicht.';
 
+if (empty($password))
+    $_SESSION['error_messages'][] = 'Wachtwoord is verplicht';
 /*
  * Nu proberen we een connectie te maken met de database
  * en de te controleren of de ingetikte username en password
@@ -64,7 +68,8 @@ try {
                                 WHERE username = :username AND password = :password');
     $user_query->execute([
         ':username' => $username,
-        ':password' => $password
+        ':password' => sha1($password)      // Wel eerst encrypten, want in de
+                                            // database staat deze ook encrypted.
     ]);
 
     /*
@@ -73,7 +78,8 @@ try {
      * Als het niet goedgegaan is zal de waarde in de variabele $user gelijk
      * zijn aan null
      */
-    $users = $user_query->fetchAll();
+    $users = $user_query->fetch();  // Deze haalt slechts 1 record op
+                                    // fetchAll haalt meerdere op ook al is er maar 1 als resultaat
 
     /*
      * We controleren nu of de waard van de variabele ongelijk is aan null
@@ -84,8 +90,14 @@ try {
          * met de record van de gebruiker uit de database
          */
         // TODO STAP 1: Vastleggen dat de login is goedgegaan in de sessie
+        $_SESSION['naam'] = $users['naam'];
+        $_SESSION['username'] = $users['username'];
+        $_SESSION['id'] = $users['id'];
+        $_SESSION['email'] = $users['email'];
 
         // TODO STAP 2: Doorgaan naar dashboard.php
+        header('Location: ../dashboard.php');
+        exit(0);
     } else {
         /*
          * Login is NIET goedgegaan, de variabele $user is dus gevuld met
@@ -93,7 +105,7 @@ try {
          */
         // STAP 1:  Een foutmelding vastleggen in de sessie, zodat login.php
         //          deze kan laten zien.
-        $_SESSION['error_message'] = 'De combinatie van gebruikersnaam en wachtwoord klopt niet';
+        isset($_SESSION['error_messages']) ?: $_SESSION['error_messages'][] = 'De combinatie van gebruikersnaam en wachtwoord klopt niet';
 
         // STAP 2:  De ingetikte gebruikersnaam weer teruggeven aan login.php
         //          zodat deze weer kan worden ingevuld in de input voor username

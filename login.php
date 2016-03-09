@@ -8,15 +8,16 @@ session_start();
 /*
  * Standaard vullen we de twee variabelen met een lege string
  */
-$error_message = '';
+$error_messages = [];
 $username = '';
 
 /*
  * Alleen als de sessie variabele error_message is gevuld stoppen
  * we deze in de variabele $error_message. Later zullen we deze gebruiken.
  */
-if(isset($_SESSION['error_message'])) {
-    $error_message = $_SESSION['error_message'];
+if(isset($_SESSION['error_messages'])) {
+    $error_messages = $_SESSION['error_messages'];
+    unset($_SESSION['error_messages']);
 }
 
 /*
@@ -25,6 +26,7 @@ if(isset($_SESSION['error_message'])) {
  */
 if(isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
+    unset($_SESSION['username']);
 }
 ?>
 <!DOCTYPE html>
@@ -36,6 +38,7 @@ if(isset($_SESSION['username'])) {
         <title>Les 05 - Dashboard</title>
 
         <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/font-awesome.css" />
         <link rel="stylesheet" href="css/style.css" />
     </head>
 
@@ -50,6 +53,12 @@ if(isset($_SESSION['username'])) {
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">Les 05</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#"><i class="fa fa-user-plus"></i>&nbsp;Registreren</a></li>
+                        <li><a href="login.php"><i class="fa fa-unlock"></i>&nbsp;Aanmelden</a></li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -66,10 +75,16 @@ if(isset($_SESSION['username'])) {
                              * We willen de alert box alleen laten zien als er ook
                              * een error_message is, dus niet een lege string is.
                              */
-                            if(!empty($error_message)):
+                            if(!empty($error_messages)):
                             ?>
                                 <div class="alert alert-danger" role="alert">
-                                    <?= $error_message; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong>Fout! </strong><br />
+                                    <ul>
+                                    <?php foreach($error_messages as $error_message): ?>
+                                        <li><?= $error_message; ?></li>
+                                    <?php endforeach; ?>
+                                    </ul>
                                 </div>
                             <?php
                             endif;
