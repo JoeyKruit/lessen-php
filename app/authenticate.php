@@ -51,51 +51,43 @@ if (empty($username))
 
 if (empty($password))
     $_SESSION['error_messages'][] = 'Wachtwoord is verplicht';
+
 /*
- * Nu proberen we een connectie te maken met de database
- * en de te controleren of de ingetikte username en password
- * in de database voorkomen.
+ * Als er hierboven een fout is opgetreden dan gaan we ook
+ * direct terug naar login.php
  */
-try {
-    // De connectie maken
-    $db = new PDO('mysql:host=127.0.0.1;dbname=les05', 'root', 'root');
+if(isset($_SESSION['error_messages'])) {
+    $_SESSION['username'] = $username;
+    header('Location: ../login.php');
+    exit(0);
+}
 
-    /*
-     * De SQL-statement om te controleren of de ingetikte username en password
-     * in de database in de tabel users voorkomen
-     */
-    $user_query = $db->prepare('SELECT * FROM users
-                                WHERE username = :username AND password = :password');
-    $user_query->execute([
-        ':username' => $username,
-        ':password' => sha1($password)      // Wel eerst encrypten, want in de
-                                            // database staat deze ook encrypted.
-    ]);
+if (connectToDatabase()) {
+    executeDbStatement('SELECT * FROM users WHERE username = :username AND password = :password',
+        [
+            ':username' => $username,
+            ':password' => sha1($password)      // Wel eerst encrypten, want in de
+                                                // database staat deze ook encrypted.
+        ]
+    );
 
-    /*
-     * Als de gebruiker in de database tabel users voorkomt dan halen we
-     * zijn/haar record nu binnen en stoppen deze in de variabele $user.
-     * Als het niet goedgegaan is zal de waarde in de variabele $user gelijk
-     * zijn aan null
-     */
-    $users = $user_query->fetch();  // Deze haalt slechts 1 record op
-                                    // fetchAll haalt meerdere op ook al is er maar 1 als resultaat
+    executeDbStatement('SELECT * FROM user');
 
-    /*
-     * We controleren nu of de waard van de variabele ongelijk is aan null
-     */
+    $users = fetchRecord();
+
     if($users) {
         /*
          * Login is goedgegaan, dus de variabele $user is gevuld nu
          * met de record van de gebruiker uit de database
          */
-        // TODO STAP 1: Vastleggen dat de login is goedgegaan in de sessie
+        // STAP 1: Vastleggen dat de login is goedgegaan in de sessie
         $_SESSION['naam'] = $users['naam'];
         $_SESSION['username'] = $users['username'];
         $_SESSION['id'] = $users['id'];
         $_SESSION['email'] = $users['email'];
+        $_SESSION['role'] = $users['role'];
 
-        // TODO STAP 2: Doorgaan naar dashboard.php
+        // STAP 2: Doorgaan naar dashboard.php
         header('Location: ../dashboard.php');
         exit(0);
     } else {
@@ -116,11 +108,4 @@ try {
         header('Location: ../login.php');
         exit(0);
     }
-} catch(PDOException $e) {
-    /*
-     * Als er iets onverwachts fout gaat met de database connectie
-     * dan vangen we dat hier op (ons programma stopt dus niet met
-     * rare foutmeldingen) en laten een aangepaste foutmelding zien.
-     */
-    echo 'ERROR: ' . $e->getMessage();
 }

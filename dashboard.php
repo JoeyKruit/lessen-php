@@ -1,15 +1,12 @@
 <?php
-session_start();
+include_once('app/authentication.php');
 
-if(!isset($_SESSION['username']) && !isset($_SESSION['id']) && !isset($_SESSION['email'])) {
-    /*
-     * Er is blijkbaar niet ingelogd, want deze driee sessie variabelen bestaan niet
-     * Dus gaan we terug naar het login formulier
-     */
+if(!isLoggedIn()) {
     $_SESSION['error_messages'][] = 'Voor het dashboard moet je ingelogd zijn.';
     header('Location: login.php');
     exit(0);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -54,6 +51,11 @@ if(!isset($_SESSION['username']) && !isset($_SESSION['id']) && !isset($_SESSION[
                         <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Instellingen</a></li>
                         <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
                         <li role="separator" class="divider"></li>
+                        <?php if(isAdmin()): ?>
+                            <li><a href="adminpanel.php"><i class="fa fa-gear"></i>&nbsp;Admin Panel</a></li>
+                            <li role="separator" class="divider"></li>
+                        <?php endif; ?>
+
                         <li><a href="logout.php"><i class="fa fa-lock"></i>&nbsp;Afmelden</a></li>
                     </ul>
                 </li>

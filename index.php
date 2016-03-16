@@ -14,3 +14,5 @@
  * TODO     NEE -> Dan gaan we door naar het login scherm
  */
 session_start();
+
+echo '<h1>Index - Moet nog aangepast worden</h1>';
