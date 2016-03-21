@@ -11,7 +11,7 @@ probleem aanpakken en uitwerken.
 
 1. Aanmaken van een database m.b.v. PHPMyAdmin (**AF**)
 2. Aanmaken van een users tabel (**AF**)
-    Gegevens:    **id**   int(11)       PRIMARY KEY AUTO_INCREMENT |
+    Gegevens:    **id**   int(11)       PRIMARY KEY AUTO_INCREMENT
                  username varchar(30)
                  password varchar(255)  *sha1 encoded*
                  email    varchar(255)
