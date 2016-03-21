@@ -56,7 +56,7 @@ if(isset($_SESSION['username'])) {
                 </div>
                 <div id="navbar" class="navbar-collapse collapse navbar-right">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="register-vb.php"><i class="fa fa-user-plus"></i>&nbsp;Registreren</a></li>
+                        <li><a href="register.php"><i class="fa fa-user-plus"></i>&nbsp;Registreren</a></li>
                         <li><a href="login.php"><i class="fa fa-unlock"></i>&nbsp;Aanmelden</a></li>
                     </ul>
                 </div>

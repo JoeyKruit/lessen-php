@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+$error_messages = [];
+$naam = '';
+$username = '';
+$email = '';
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>

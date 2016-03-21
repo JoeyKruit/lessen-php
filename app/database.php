@@ -61,11 +61,15 @@ function executeDbStatement($sql, $parameters = [])
 
 function fetchRecord()
 {
+    global $statement;
 
+    return $statement->fetch();
 }
 
 
 function fetchAllRecords()
 {
+    global $statement;
 
+    return $statement->fetchAll();
 }

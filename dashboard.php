@@ -44,7 +44,7 @@ if(!isLoggedIn()) {
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/"><i class="fa fa-home"></i>&nbsp;Home</a></li>
+                <li><a href="http://klas1-1516.ao/programmeren/41a-php/les05-php/dashboard.php"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                 <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;Welkom, <?= $_SESSION['naam']; ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-edit"></i>&nbsp;Profiel</a></li>

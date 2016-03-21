@@ -1,10 +1,12 @@
 <?php
+session_start();
+
 /*
  * session_start maakt het mogelijk om in dit script te werken
  * met een sessie. Dit is ook altijd de eerste statement in je
  * script.
  */
-session_start();
+include_once('database.php');
 
 /*
  * Hieronder controleren we of dit script is opgestart vanuit een
@@ -70,8 +72,6 @@ if (connectToDatabase()) {
                                                 // database staat deze ook encrypted.
         ]
     );
-
-    executeDbStatement('SELECT * FROM user');
 
     $users = fetchRecord();
 
