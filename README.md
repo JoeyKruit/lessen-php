@@ -1,23 +1,20 @@
 # PHP Lessen
-===================================================================================
+===
 ## Inleiding
 
 In de lessen gedurende periode 3 leren we hoe, gericht op de opdracht om een forum
 te bouwen, met PHP een dergelijke applicatie kunnen bouwen. We gaan iedere les een
 probleem aanpakken en uitwerken.
 
-==================================================================================
+===
 ## Lessen
 
 1. Aanmaken van een database m.b.v. PHPMyAdmin (**AF**)
 2. Aanmaken van een users tabel (**AF**)
-    Gegevens:
-    | Kolom    | Type(lengte)  | Extra                      |
-    | -------- | ------------- | -------------------------- |
-    | **id**   | int(11)       | PRIMARY KEY AUTO_INCREMENT |
-    | username | varchar(30)   |                            |
-    | password | varchar(255)  | *sha1 encoded*             |
-    | email    | varchar(255)  |                            |
+    Gegevens:    **id**   int(11)       PRIMARY KEY AUTO_INCREMENT |
+                 username varchar(30)
+                 password varchar(255)  *sha1 encoded*
+                 email    varchar(255)
 2. Leren werken met databases middels de PDO bibliotheek in PHP (**AF**)
 3. Hoe vertellen we andere scripts, zoals het dashboard dat er succesvol
    ingelogd is (SESSIONS)? Het dashboard mag alleen toegankelijk zijn als
@@ -25,9 +22,7 @@ probleem aanpakken en uitwerken.
    weer terug naar het inlogscherm. (**AF**)
 4. We leren dus wat SESSIONS zijn en hoe we deze dienen te gebruiken.(**AF**)
 5. In de tabel users verwerken we een rol van een gebruiker als volgt:(**AF**)
-                  | Kolom     | Type(lengte)  | Extra                             |
-                  | --------- | ------------- | --------------------------------- |
-                  | role      | int(1)        | default 1 *(0 = Admin, 1 = User)* |
+                  role      int(1)        default 1 *(0 = Admin, 1 = User)*
 6. We hebben in een eerste refactoring van de code functionaliteit uit de
    verschillende php-bestanden gehaald en in eigen php-bestanden geplaatst. Dit
    maakt het makkelijker en leesbaarder. Zo plaatsen we alle code die nodig is
