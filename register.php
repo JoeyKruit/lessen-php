@@ -5,6 +5,15 @@ $error_messages = [];
 $naam = '';
 $username = '';
 $email = '';
+
+if(isset($_SESSION['error_messages'])) {
+    $error_messages = $_SESSION['error_messages'];
+    $naam = $_SESSION['naam'] ?: '';
+    $username = $_SESSION['username'] ?: '';
+    $email = $_SESSION['email'] ?: '';
+    unset($_SESSION['error_messages']);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -66,7 +75,7 @@ $email = '';
                         <?php
                     endif;
                     ?>
-                    <form method="POST" action="app/register_user-vb.php">
+                    <form method="POST" action="app/register-user.php">
                         <div class="form-group">
                             <label for="naam">Volledige naam <span class="required-field">*</span></label>
                             <input name="naam" type="text" class="form-control" id="naam" placeholder="Volledige naam" value="<?= $naam; ?>">
