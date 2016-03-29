@@ -1,5 +1,5 @@
 <?php
-session_start();
+include_once('app/authentication.php');
 
 $error_messages = [];
 $naam = '';
@@ -13,41 +13,13 @@ if(isset($_SESSION['error_messages'])) {
     $email = $_SESSION['email'] ?: '';
     unset($_SESSION['error_messages']);
 }
+include_once('templates/header.php');
 
+if(!isLoggedIn())
+    include_once('templates/nav-login.php');
+else
+    include_once('templates/nav-loggedin.php');
 ?>
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <title>Les 05 - Registreren</title>
-
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/font-awesome.css" />
-    <link rel="stylesheet" href="css/style.css" />
-</head>
-
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Les 05</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse navbar-right">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><i class="fa fa-user-plus"></i>&nbsp;Registreren</a></li>
-                <li><a href="login.php"><i class="fa fa-unlock"></i>&nbsp;Aanmelden</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <main class="container">
     <div class="row">
@@ -104,7 +76,5 @@ if(isset($_SESSION['error_messages'])) {
     </div>
 </main>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-</body>
-</html>
+<?php
+include_once('templates/footer.php');

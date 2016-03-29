@@ -10,6 +10,7 @@ unset($_SESSION['username']);       // Verwijder de sessie variabele username
 unset($_SESSION['id']);             // Verwijder de sessie variabele id
 unset($_SESSION['email']);          // Verwijder de sessie variabele email
 unset($_SESSION['naam']);           // Verwijder de sessie variabele naam
+unset($_SESSION['role']);           // Verwijder de sessie variabele role
 
 session_destroy();                  // Stop de sessie en verwijder de unieke sessie ID
 
