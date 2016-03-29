@@ -1,4 +1,16 @@
 <?php
+/*
+ * TODO: E-mail verificatie toevoegen aan het registreren
+ *       Een user mag pas inloggen als z'n e-mailadres is
+ *       geverifieerd.
+ *       We willen een extra functie net als isLoggedIn()
+ *       waarmee we kunnen controleren of een user z'n
+ *       mailadres is geverifieerd. Maar waar moet deze
+ *       functie geplaatst worden? In database.php of in
+ *       authentication.php? Denk hierover na! Wat gaat deze
+ *       functie doen? Raadpleegt deze de database? Heeft het
+ *       te maken met authenticatie?
+ */
 include_once('app/authentication.php');
 
 $error_messages = [];
