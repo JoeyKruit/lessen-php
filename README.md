@@ -33,12 +33,12 @@ probleem aanpakken en uitwerken.
    in een eigen php-bestanden, genaamd authentication.php.(**AF**)
 7. Registratieformulier maken (**AF** op 21-03-2016)
 8. Afhandeling van de registratie uitwerken in register-user.php (**AF** op 21-03-2016)
-9. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
-   ziet de structuur met tabellen er dan uit.
-10. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
-   van alle thema's in ons forum. Ook hoe we statistieken, zoals het totaal aantal
-   reacties per thema, kunnen tonen.
-11. We merken dat we ook steeds voor alle pagina's hele grote stukken HTML moeten
+9. We merken dat we ook steeds voor alle pagina's hele grote stukken HTML moeten
    herhalen. We gaan daarom alles wederom refactoren op een manier dat we hele
    stukken HTML slechts eenmaal hoeven aan te maken en het steeds kunnen hergebruiken
    op iedere pagina.
+10. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
+   ziet de structuur met tabellen er dan uit.
+11. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
+   van alle thema's in ons forum. Ook hoe we statistieken, zoals het totaal aantal
+   reacties per thema, kunnen tonen.
