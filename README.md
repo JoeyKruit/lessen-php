@@ -36,10 +36,10 @@ probleem aanpakken en uitwerken.
 9. We merken dat we ook steeds voor alle pagina's hele grote stukken HTML moeten
    herhalen. We gaan daarom alles wederom refactoren op een manier dat we hele
    stukken HTML slechts eenmaal hoeven aan te maken en het steeds kunnen hergebruiken
-   op iedere pagina.
-10. E-mail verificatie bij registreren. Het is de bedoeling dat we pas kunnen inloggen als
-10. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
+   op iedere pagina.(**AF** op 29-03-2016)
+10. E-mail verificatie bij registreren. Het is de bedoeling dat we pas kunnen inloggen als we ons mailadres nog niet hebben geverifieerd.
+11. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
    ziet de structuur met tabellen er dan uit.
-11. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
+12. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
    van alle thema's in ons forum. Ook hoe we statistieken, zoals het totaal aantal
    reacties per thema, kunnen tonen.
