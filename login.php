@@ -6,6 +6,7 @@ include_once('app/authentication.php');
  */
 $error_messages = [];
 $username = '';
+$page_title = 'Aanmelden';
 
 /*
  * Alleen als de sessie variabele error_message is gevuld stoppen
@@ -37,7 +38,7 @@ else
                 <div class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <h1>Inloggen</h1>
+                            <h1>Aanmelden</h1>
                             <hr />
                             <?php
                             /*
@@ -66,6 +67,9 @@ else
                                 <div class="form-group">
                                     <label for="password">Wachtwoord</label>
                                     <input name="password" type="password" class="form-control" id="password" placeholder="Wachtwoord">
+                                </div>
+                                <div class="pull-left login-form-links">
+                                    <a href="">Wachtwoord vergeten...</a>
                                 </div>
                                 <button type="submit" class="btn btn-primary pull-right">Inloggen</button>
                             </form>

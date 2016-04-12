@@ -77,6 +77,14 @@ if (connectToDatabase()) {
 
     if($users) {
         /*
+         * Is de huidige gebruiker geverifieerd
+         */
+        if(! $users['verified']) {
+            $_SESSION['error_messages'][] = 'Uw account is nog niet geverifieerd!';
+            header('Location: ../login.php');
+            exit(0);
+        }
+        /*
          * Login is goedgegaan, dus de variabele $user is gevuld nu
          * met de record van de gebruiker uit de database
          */
@@ -88,7 +96,10 @@ if (connectToDatabase()) {
         $_SESSION['role'] = $users['role'];
 
         // STAP 2: Doorgaan naar dashboard.php
-        header('Location: ../dashboard.php');
+        if($_SESSION['role'] == 0)
+            header('Location: ../adminpanel.php');
+        else
+            header('Location: ../dashboard.php');
         exit(0);
     } else {
         /*

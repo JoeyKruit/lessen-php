@@ -13,6 +13,15 @@
  * TODO     JA -> Dan gaan we door naar het dashboard
  * TODO     NEE -> Dan gaan we door naar het login scherm
  */
-session_start();
+include('app/authentication.php');
 
-echo '<h1>Index - Moet nog aangepast worden</h1>';
+if(isLoggedIn()) {
+    if(isAdmin())
+        header('Location: adminpanel.php');
+    else
+        header('Location: dashboard.php');
+    exit(0);
+} else {
+    header('Location: login.php');
+    exit(0);
+}

@@ -1,7 +1,7 @@
 <?php
 
 include_once('app/authentication.php');
-
+$page_title = 'Admin panel';
 if(!isLoggedIn()) {
     header('Location: login.php');
     exit(0);

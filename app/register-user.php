@@ -2,6 +2,7 @@
 session_start();
 
 include('database.php');
+include('helperfunctions.php');
 /*
  * Controle of ik dit scriptje uitvoer vanuit het registratie formulier
  */
@@ -129,16 +130,49 @@ if($password != $password_repeat) {
  * en kunnen we de user opslaan in de database.
  */
 if(connectToDatabase()) {
-    executeDbStatement('INSERT INTO users(naam, username, password, email)
-                        VALUES(:naam, :username, :password, :email)',
+    // Voor we de gebruiker nieuw toevoegen aan de database willen
+    // we iets doen voor de verificatie
+    $code = generateVerificationCode();
+
+    executeDbStatement('INSERT INTO users(naam, username, password, email, verification_code)
+                        VALUES(:naam, :username, :password, :email, :code)',
         [
             ':naam' => $naam,
             ':username' => $username,
             ':password' => sha1($password),
-            ':email' => $email
+            ':email' => $email,
+            ':code' => $code
         ]
     );
 
+    // Gebruiker is opgeslagen in de database
+    // Nu gaan we de mail genereren met een link om te verifieren
+    $link = "http://klas1.ao/programmeren/41a-php/les05-php/app/verify-user.php?code=$code";
+    $mail_body = "
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Verificatiemail</title>
+    </head>
+    <body>
+        <h1>KLIK OP ONDERSTAANDE LINK OM UW ACCOUNT TE VERIFIEREN</h1>
+        <a href='$link'>Klik hier om te verifieren</a>
+    </body>
+    </html>
+    ";
+
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
+
+// Additional headers
+    $headers .= "To: Johan Strootman <$email>" . "\r\n";
+    $headers .= 'From: Forum <ao-forum@ao-alfa.nl>' . "\r\n";
+
+    mail($email, 'Verificatie', $mail_body, $headers);
+
+    file_put_contents('verify.html', $mail_body);
+
+    // Registratie heeft plaatsgevonden
     header('Location: ../login.php');
     exit(0);
 }

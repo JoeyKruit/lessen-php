@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Les 05</a>
+            <a class="navbar-brand" href="#">Lessen PHP</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -18,6 +18,7 @@
                         <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Instellingen</a></li>
                         <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
                         <li role="separator" class="divider"></li>
+                        <li><a href="dashboard.php"><i class="fa fa-gear"></i>&nbsp;Dashboard</a></li>
                         <?php if(isAdmin()): ?>
                             <li><a href="adminpanel.php"><i class="fa fa-gear"></i>&nbsp;Admin Panel</a></li>
                             <li role="separator" class="divider"></li>

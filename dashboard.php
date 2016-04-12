@@ -19,7 +19,7 @@ if(!isLoggedIn()) {
     <meta name="author" content="J.J. Strootman" />
     <link rel="icon" href="img/favicon.ico" />
 
-    <title>Les 05 - Dashboard</title>
+    <title>Dashboard | Lessen PHP</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -40,7 +40,7 @@ if(!isLoggedIn()) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Les 05</a>
+            <a class="navbar-brand" href="#">Lessen PHP</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -60,9 +60,6 @@ if(!isLoggedIn()) {
                     </ul>
                 </li>
             </ul>
-<!--            <form class="navbar-form navbar-right">-->
-<!--                <input type="text" class="form-control" placeholder="Zoeken...">-->
-<!--            </form>-->
         </div>
     </div>
 </nav>

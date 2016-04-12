@@ -13,6 +13,7 @@
  */
 include_once('app/authentication.php');
 
+$page_title = 'Registreren';
 $error_messages = [];
 $naam = '';
 $username = '';
