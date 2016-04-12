@@ -37,7 +37,7 @@ probleem aanpakken en uitwerken.
    herhalen. We gaan daarom alles wederom refactoren op een manier dat we hele
    stukken HTML slechts eenmaal hoeven aan te maken en het steeds kunnen hergebruiken
    op iedere pagina.(**AF** op 29-03-2016)
-10. E-mail verificatie bij registreren. Het is de bedoeling dat we pas kunnen inloggen als we ons mailadres nog niet hebben geverifieerd.
+10. E-mail verificatie bij registreren. Het is de bedoeling dat we pas kunnen inloggen als we ons mailadres nog niet hebben geverifieerd. (**AF** op 11-04-2016)
 11. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
    ziet de structuur met tabellen er dan uit.
 12. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
