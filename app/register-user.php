@@ -164,7 +164,7 @@ if(connectToDatabase()) {
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=UTF-8' . "\r\n";
 
-// Additional headers
+    // Additional headers
     $headers .= "To: Johan Strootman <$email>" . "\r\n";
     $headers .= 'From: Forum <ao-forum@ao-alfa.nl>' . "\r\n";
 

@@ -39,7 +39,12 @@ probleem aanpakken en uitwerken.
    op iedere pagina.(**AF** op 29-03-2016)
 10. E-mail verificatie bij registreren. Het is de bedoeling dat we pas kunnen inloggen als we ons mailadres nog niet hebben geverifieerd. (**AF** op 11-04-2016)
 11. Database uitbreiden voor het forum. Welke gegevens willen we bewaren en hoe
-   ziet de structuur met tabellen er dan uit.
+   ziet de structuur met tabellen er dan uit. (**AF** op 11-04-2016)
 12. Met testgegevens in de database leren hoe we een overzicht kunnen produceren
    van alle thema's in ons forum. Ook hoe we statistieken, zoals het totaal aantal
-   reacties per thema, kunnen tonen.
+   reacties per thema, kunnen tonen. (**AF** op 18-04-2016)
+13. Uitbouwen van onze applicatie met reacties.
+14. Uitbouwen van de login beveiliging. Controlleren of iemand een admin is voor thema's aanmaken enz.
+15. Uitbouwen van de mogelijkheid om een thema aan te maken als je een admin bent
+16. Uitbouwen van de mogelijkheid om een onderwerp aan te maken als je bent ingelogd.
+17. Uitbouwen van de mogelijkheid om een reactie te plaatsen als je bent ingelogd.
