@@ -37,7 +37,11 @@ if(connectToDatabase()) {
         <div class="row">
             <div class="col-md-12">
                 <!-- Hieronder laten de titel van de bijbehorende thema zien -->
-                <h1><?= $theme['title']; ?></h1>
+                <h1><?= $theme['title']; ?>
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Nieuw</a>
+                    </span>
+                </h1>
 
                 <!-- BEGIN VAN EEN ONDERWERP -->
                 <!-- Met onderstaande PHP lus (foreach) lopen we langs
@@ -58,10 +62,10 @@ if(connectToDatabase()) {
                                     </h3>
                                 </div>
                                 <div class="col-md-2">
-                                    <h3 class="panel-title">Reactie</h3>
+                                    <h3 class="panel-title text-center">Reacties</h3>
                                 </div>
                                 <div class="col-md-2">
-                                    <h3 class="panel-title">Laatste reactie</h3>
+                                    <h3 class="panel-title text-center">Laatste reactie</h3>
                                 </div>
                             </div>
                         </div> <!-- EINDE HEADING -->
@@ -70,12 +74,12 @@ if(connectToDatabase()) {
                             <div class="row">
                                 <div class="col-md-8">
                                     <!-- Het bericht gekoppeld aan dit onderwerp -->
-                                    <?= $subject['message']; ?>
+                                    <?= substr($subject['message'], 0, 60) . '...'; ?>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 post-amount">
                                     10 <!-- TODO: Tellen hoeveel reacties er zijn -->
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 text-center">
                                     <!-- TODO: De laatste reactie binnen dit onderwerp tonen -->
                                     11-02-2016 11:56<br />
                                     door Truus

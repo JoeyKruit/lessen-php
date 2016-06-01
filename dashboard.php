@@ -1,255 +1,79 @@
 <?php
-include_once('app/authentication.php');
 
-if(!isLoggedIn()) {
-    $_SESSION['error_messages'][] = 'Voor het dashboard moet je ingelogd zijn.';
-    header('Location: login.php');
-    exit(0);
+$page_title = 'Forum Thema\'s';
+
+include('app/authentication.php');
+
+include('templates/header.php');
+if(isLoggedIn())
+    include('templates/nav-loggedin.php');
+else
+    include('templates/nav-login.php');
+include('app/database.php');
+
+if(connectToDatabase()) {
+    /*
+     * Hieronder halen we alle thema's uit de database
+     */
+    executeDbStatement("SELECT * FROM themes");
+
+    $themes = fetchAllRecords();        // Hierin zitten nu alle thema's
+} else {
+    // Dit is niet de eind oplossing om om te gaan met fouten
+    die('Geen connectie met de database mogelijk');
 }
-
 ?>
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="" />
-    <meta name="author" content="J.J. Strootman" />
-    <link rel="icon" href="img/favicon.ico" />
 
-    <title>Dashboard | Lessen PHP</title>
+    <main class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Thema's
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Nieuw</a>
+                    </span>
+                </h1>
 
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/font-awesome.css" />
-
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet" />
-</head>
-
-<body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Lessen PHP</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://klas1-1516.ao/programmeren/41a-php/les05-php/dashboard.php"><i class="fa fa-home"></i>&nbsp;Home</a></li>
-                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i>&nbsp;Welkom, <?= $_SESSION['naam']; ?><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-edit"></i>&nbsp;Profiel</a></li>
-                        <li><a href="#"><i class="fa fa-gear"></i>&nbsp;Instellingen</a></li>
-                        <li><a href="#"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
-                        <li role="separator" class="divider"></li>
-                        <?php if(isAdmin()): ?>
-                            <li><a href="adminpanel.php"><i class="fa fa-gear"></i>&nbsp;Admin Panel</a></li>
-                            <li role="separator" class="divider"></li>
-                        <?php endif; ?>
-
-                        <li><a href="logout.php"><i class="fa fa-lock"></i>&nbsp;Afmelden</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Rapportage</a></li>
-                <li><a href="#">Analytics</a></li>
-                <li><a href="#">Exporteren</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item 1</a></li>
-                <li><a href="">Nav item 2</a></li>
-                <li><a href="">Nav item 3</a></li>
-                <li><a href="">Nav item 4</a></li>
-                <li><a href="">Meer nav...</a></li>
-            </ul>
-            <ul class="nav nav-sidebar">
-                <li><a href="">Nav item 5</a></li>
-                <li><a href="">Nav item 6</a></li>
-                <li><a href="">Nav item 7</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
-
-            <div class="row placeholders">
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Iets anders...</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Iets anders...</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Iets anders...</span>
-                </div>
-                <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-                    <h4>Label</h4>
-                    <span class="text-muted">Iets anders...</span>
-                </div>
-            </div>
-
-            <h2 class="sub-header">Section titel</h2>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Heading 1</th>
-                        <th>Heading 2</th>
-                        <th>Heading 3</th>
-                        <th>Heading 4</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                        <td>elit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                        <td>ante</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                        <td>nisi</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                        <td>at</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                        <td>Duis</td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>Praesent</td>
-                        <td>mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,008</td>
-                        <td>Fusce</td>
-                        <td>nec</td>
-                        <td>tellus</td>
-                        <td>sed</td>
-                    </tr>
-                    <tr>
-                        <td>1,009</td>
-                        <td>augue</td>
-                        <td>semper</td>
-                        <td>porta</td>
-                        <td>Mauris</td>
-                    </tr>
-                    <tr>
-                        <td>1,010</td>
-                        <td>massa</td>
-                        <td>Vestibulum</td>
-                        <td>lacinia</td>
-                        <td>arcu</td>
-                    </tr>
-                    <tr>
-                        <td>1,011</td>
-                        <td>eget</td>
-                        <td>nulla</td>
-                        <td>Class</td>
-                        <td>aptent</td>
-                    </tr>
-                    <tr>
-                        <td>1,012</td>
-                        <td>taciti</td>
-                        <td>sociosqu</td>
-                        <td>ad</td>
-                        <td>litora</td>
-                    </tr>
-                    <tr>
-                        <td>1,013</td>
-                        <td>torquent</td>
-                        <td>per</td>
-                        <td>conubia</td>
-                        <td>nostra</td>
-                    </tr>
-                    <tr>
-                        <td>1,014</td>
-                        <td>per</td>
-                        <td>inceptos</td>
-                        <td>himenaeos</td>
-                        <td>Curabitur</td>
-                    </tr>
-                    <tr>
-                        <td>1,015</td>
-                        <td>sodales</td>
-                        <td>ligula</td>
-                        <td>in</td>
-                        <td>libero</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <!-- BEGIN VAN EEN THEMA -->
+                <!-- Met de onderstaande foreach statement in PHP lopen we
+                     door alle thema's die we hierboven uit de database
+                     hebben gehaald. Ieder thema komt dan beschikbaar in de
+                     variabele $theme. -->
+                <?php foreach($themes as $theme): ?>
+                    <div class="panel panel-default">
+                        <!-- HEADING -->
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h3 class="panel-title">
+                                        <!-- We maken hier een link per thema om de
+                                             onderwerpen te kunnen zien in dit thema -->
+                                        <a href="theme.php?theme=<?= $theme['id']; ?>">
+                                            <?= $theme['title']; ?>
+                                        </a>
+                                    </h3>
+                                </div>
+                                <div class="col-md-2">
+                                    <h3 class="panel-title text-center">Onderwerpen</h3>
+                                </div>
+                            </div>
+                        </div> <!-- EINDE HEADING -->
+                        <!-- BODY -->
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <?= $theme['description']; ?>
+                                </div>
+                                <!-- TODO: We moeten nog laten zien hoeveel onderwerpen er per thema zijn -->
+                                <div class="col-md-2 post-amount">
+                                    8
+                                </div>
+                            </div>
+                        </div> <!-- EINDE BODY -->
+                    </div> <!-- EINDE PANEL/THEMA -->
+                <?php endforeach; ?>    <!-- EINDE FOREACH -->
             </div>
         </div>
-    </div>
-</div>
+    </main>
+<?php
+include('templates/footer.php');
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="js/holder.min.js"></script>
-</body>
-</html>

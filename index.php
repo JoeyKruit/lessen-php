@@ -2,8 +2,13 @@
 
 $page_title = 'Forum Thema\'s';
 
+include('app/authentication.php');
+
 include('templates/header.php');
-include('templates/nav-login.php');
+if(isLoggedIn())
+    include('templates/nav-loggedin.php');
+else
+    include('templates/nav-login.php');
 include('app/database.php');
 
 if(connectToDatabase()) {
@@ -22,7 +27,11 @@ if(connectToDatabase()) {
     <main class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Thema's</h1>
+                <h1>Thema's
+                    <span class="pull-right">
+                        <a href="#" class="btn btn-success btn-xs"><i class="fa fa-plus"></i> Nieuw</a>
+                    </span>
+                </h1>
 
                 <!-- BEGIN VAN EEN THEMA -->
                 <!-- Met de onderstaande foreach statement in PHP lopen we
@@ -34,7 +43,7 @@ if(connectToDatabase()) {
                         <!-- HEADING -->
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <h3 class="panel-title">
                                         <!-- We maken hier een link per thema om de
                                              onderwerpen te kunnen zien in dit thema -->
@@ -44,28 +53,19 @@ if(connectToDatabase()) {
                                     </h3>
                                 </div>
                                 <div class="col-md-2">
-                                    <h3 class="panel-title">Onderwerpen</h3>
-                                </div>
-                                <!-- TODO: Is dit wel nodig om te laten zien bij een thema? -->
-                                <div class="col-md-2">
-                                    <h3 class="panel-title">Laatste reactie</h3>
+                                    <h3 class="panel-title text-center">Onderwerpen</h3>
                                 </div>
                             </div>
                         </div> <!-- EINDE HEADING -->
                         <!-- BODY -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <?= $theme['description']; ?>
                                 </div>
                                 <!-- TODO: We moeten nog laten zien hoeveel onderwerpen er per thema zijn -->
-                                <div class="col-md-2">
+                                <div class="col-md-2 post-amount">
                                     8
-                                </div>
-                                <!-- TODO: Is dit wel nodig voor deze pagina? -->
-                                <div class="col-md-2">
-                                    11-02-2016 11:56<br />
-                                    door Truus
                                 </div>
                             </div>
                         </div> <!-- EINDE BODY -->
